@@ -2,11 +2,38 @@ body {
     margin: 0;
     padding: 10px;
     position: relative;
-    background-color: #00E0FF;
+    background-color: #FFFFFF;
 }
 
 h1 {
-    margin-left: 40%;
+    text-align: center;
     margin-top: 10px;
+    font-size: 2em;
     font-family: "sans-serif";
+}
+
+#navbar {
+    left: 20%;
+    right: 20%;
+    width: 60%;
+    position: relative;
+    height: 100px;
+    background-color: #000000;
+}
+
+.nav {
+    position: relative;
+    top: 5%;
+    left: 3%;
+    background-color: #FFFFFF;
+    width: 45%;
+    height: 90px;
+    color: #000000;
+    line-height: 90px;
+    font-size: 2em;
+    text-align: center;
+    font-family: courier;
+    padding: 0% 1% 0% 1%;
+    display: inline-block;
+    /*float: left;*/
 }

@@ -1,12 +1,22 @@
 #!/bin/python
 import codecs
-import os.path
+import os
 
 # Contains functions for managing posts of the blog
 # It can -
 # * Add a post
 # * Remove a post
 # * Edit a post**
+
+class PostDoesntExist(Exception):
+    """Post with given title doesn't exist."""
+    def __init__(self, title):
+        print "Post %s doesn't exist" % title
+
+class PostAlreadyExists(Exception):
+    """Post with a given filename already exists."""
+    def __init__(self, title):
+        print "Post with title %s already exists." % title
 
 class Post(object):
 
@@ -42,6 +52,7 @@ def rmPost(post):
         if not os.path.isfile(path):
             raise PostDoesNotExist(post.title)
         # delete_file(path)
-    
+        os.remove(path)
+        
     except:
         pass
