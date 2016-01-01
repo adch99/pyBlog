@@ -11,7 +11,7 @@ config = {
 	'download_url': 'Where to download it',
 	'author_email': 'adityachincholi@gmail.com',
 	'version': '0.1',
-	'install_requires': ['nose', 'web.py'],
+	'install_requires': ['nose', 'web.py', 'markdown'],
 	'packages': ['blog'],
 	'scripts': []
 	'name': 'Blog'

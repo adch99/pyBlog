@@ -1,0 +1,12 @@
+body {
+    margin: 0;
+    padding: 10px;
+    position: relative;
+    background-color: #00E0FF;
+}
+
+h1 {
+    margin-left: 40%;
+    margin-top: 10px;
+    font-family: "sans-serif";
+}
