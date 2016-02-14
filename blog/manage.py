@@ -8,6 +8,7 @@ import os
 # * Remove a post
 # * Edit a post**
 
+'''
 class PostDoesntExist(Exception):
     """Post with given title doesn't exist."""
     def __init__(self, title):
@@ -17,6 +18,7 @@ class PostAlreadyExists(Exception):
     """Post with a given filename already exists."""
     def __init__(self, title):
         print "Post with title %s already exists." % title
+'''
 
 class Post(object):
 
@@ -41,9 +43,11 @@ def addPost(post):
         if os.path.isfile(path):
              raise PostAlreadyExists(post.title)
         datafile = open(path, mode="w", encoding="utf-8")
-    
-    except:
+    except PostAlreadyExists:
         pass
+    else:
+        
+    
     
 def rmPost(post):
     """Removes a post from the blog by removing the file."""

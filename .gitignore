@@ -1,2 +1,5 @@
 # ignore pyc files
 */*/*/*/*/*/*/*/*.pyc
+
+# ignore temporory files created by scratch and gedit
+*/*~
