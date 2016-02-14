@@ -1,6 +1,7 @@
 #!/bin/python
 import codecs
 import os
+import pickle
 
 # Contains functions for managing posts of the blog
 # It can -
@@ -37,26 +38,63 @@ class Post(object):
             }
 
 def addPost(post):
-    """Adds a post to the blog by saveing it to the file."""
+    """
+    Adds a post to the blog by saving it to the file.
+    Returns None if no error.
+    """
     try:
         path = os.path.join("data",post.title)
         if os.path.isfile(path):
              raise PostAlreadyExists(post.title)
-        datafile = open(path, mode="w", encoding="utf-8")
+    
     except PostAlreadyExists:
         pass
+    
     else:
-        
-    
-    
+        # Store Post as pickle in datafile
+        datafile = codecs.open(path, mode="w", encoding="utf-8")
+        val = pickle.dump(post, datafile)
+        datafile.close()
+        return val
+         
 def rmPost(post):
-    """Removes a post from the blog by removing the file."""
+    """
+    Removes a post from the blog by removing the file.
+    Returns None if no errors.
+    """
+    
     try:
         path = os.path.join("data", post.title)
         if not os.path.isfile(path):
             raise PostDoesNotExist(post.title)
-        # delete_file(path)
-        os.remove(path)
         
     except:
         pass
+        
+    else:
+        return os.remove(path) # deletes file
+        
+def getPost(title):
+    """
+    Returns the post with the given title as a Post object. 
+    """
+    try:
+        path = os.path.join("data",title)
+        if not os.path.isfile(path):
+            raise PostDoesNotExist(title)
+            
+    except PostDoesNotExist:
+        pass
+        
+    else:
+        datafile = codecs.open(path, mode="r", encoding="utf-8")
+        post = load(data)
+        datafile.close()
+        return post
+        
+def getPOstList():
+    """
+    Returns a list of titles of saved Posts.
+    Use getPost(title) to get the actual post.
+    """
+    return os.listdir("data")
