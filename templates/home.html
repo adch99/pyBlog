@@ -1,8 +1,8 @@
 $def with (posts)
 
 $for post in posts:
-    <p class="title">$post.title</p>
-    <br/>
-    $if post.image:
-        <img src="\$post.image" />
+    <div class="main-container">
+    $if post.img:
+        <img src="\$post.img" />
     <p class="content">$post.content</p>
+    </div>

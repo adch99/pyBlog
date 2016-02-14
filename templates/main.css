@@ -42,7 +42,7 @@ div {
     border-radius: 2px;
 }
 
-#main-container {
+.main-container {
     width: 60%;
     padding: 2% 1%;
     border: 1px #000000;

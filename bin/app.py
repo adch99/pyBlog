@@ -1,25 +1,29 @@
 import web
 
+from blog import manage
+
 urls = (
     "/home", "Home",
     "/add", "Add",
     "/manage", "Manage",
 )
 
-render = web.template.render("templates/", "layout.html")
+app = web.application(urls, globals())
+render = web.template.render("templates/", "template.html")
 
 class Home(object):
     """The Home Page with the articles in
     descending chronological order."""
     def GET(self):
-        if home:
-            return render.home()
+        posts = []
+        for title in manage.getPostList():
+            posts.append(manage.getPost(title))
+        return render.home(posts)
 
 class Add(object):
     """Add an article to the site."""
     def GET(self):
-        if add:
-            return render.add()
+        return render.add()
             
     def POST(self):
         if form.title and form.content:
@@ -35,4 +39,5 @@ class Manage(object):
             return render.manage()
         
 
-
+if __name__ == "__main__":
+    app.run()

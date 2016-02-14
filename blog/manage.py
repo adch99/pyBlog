@@ -22,7 +22,7 @@ class PostAlreadyExists(Exception):
 '''
 
 class Post(object):
-
+    # add timestamp
     def __init__(self, title, content, img=None):
         """Generates Post object when title, markdownized content
         and optionally an image source is given."""
@@ -88,11 +88,11 @@ def getPost(title):
         
     else:
         datafile = codecs.open(path, mode="r", encoding="utf-8")
-        post = load(data)
+        post = pickle.load(datafile)
         datafile.close()
         return post
         
-def getPOstList():
+def getPostList():
     """
     Returns a list of titles of saved Posts.
     Use getPost(title) to get the actual post.

@@ -1,3 +1,4 @@
+$def with (content)
 <html>
 <head>
     <link href="main.css" type="text/css" rel="stylesheet" />
@@ -8,10 +9,17 @@
         <div class="nav">Home</div>
         <div class="nav">Add</div>
     </div>
-    <div id="main-container">
+    <div class="main-container">
         <!--Place the main content here-->
-        This is demo text.
+        <!--This is demo text.-->
+        $:content
     </div>
+    <!--
+    <div id="main-container">
+        <h1>Some Random Title</h1>
+        Some more text.
+    </div>
+    -->
     <footer>
         <pre>This website is the intellectual property of adch99.</pre>
     </footer>
