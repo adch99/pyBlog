@@ -10,6 +10,7 @@ urls = (
 
 app = web.application(urls, globals())
 render = web.template.render("templates/")
+rendertemp = web.template.render("templates/","template.html")
 
 class Home(object):
     """The Home Page with the articles in
@@ -23,11 +24,11 @@ class Home(object):
 class Add(object):
     """Add an article to the site."""
     def GET(self):
-        return render.add()
+        return render.template(render.add())
             
     def POST(self):
         if form.title and form.content:
-            return render.added(form.title, form.content)
+            return render.template(render.added(form.title, form.content))
         
 
 class Manage(object):

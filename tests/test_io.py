@@ -22,6 +22,8 @@ def test_io_without_img():
     assert_equal(p.content, out.content)
     assert_equal(p.img, out.img)
     
+
+    
 def teardown():
     if os.path.isfile("data/Test_Title"):
         os.remove("data/Test_Title")
