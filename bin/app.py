@@ -9,7 +9,7 @@ urls = (
 )
 
 app = web.application(urls, globals())
-render = web.template.render("templates/", "template.html")
+render = web.template.render("templates/")
 
 class Home(object):
     """The Home Page with the articles in
@@ -18,7 +18,7 @@ class Home(object):
         posts = []
         for title in manage.getPostList():
             posts.append(manage.getPost(title))
-        return render.home(posts)
+        return render.template(render.home(posts))
 
 class Add(object):
     """Add an article to the site."""

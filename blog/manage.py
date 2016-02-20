@@ -1,5 +1,4 @@
 #!/bin/python
-import codecs
 import os
 import pickle
 
@@ -43,7 +42,7 @@ def addPost(post):
     Returns None if no error.
     """
     try:
-        path = os.path.join("data",post.title)
+        path = os.path.join("data",post.title.replace(" ","_"))
         if os.path.isfile(path):
              raise PostAlreadyExists(post.title)
     
@@ -52,7 +51,7 @@ def addPost(post):
     
     else:
         # Store Post as pickle in datafile
-        datafile = codecs.open(path, mode="w", encoding="utf-8")
+        datafile = open(path, mode="wb")
         val = pickle.dump(post, datafile)
         datafile.close()
         return val
@@ -64,7 +63,7 @@ def rmPost(post):
     """
     
     try:
-        path = os.path.join("data", post.title)
+        path = os.path.join("data", post.title.replace(" ","_")) # In order to avoid confusion with the OS
         if not os.path.isfile(path):
             raise PostDoesNotExist(post.title)
         
@@ -84,10 +83,11 @@ def getPost(title):
             raise PostDoesNotExist(title)
             
     except PostDoesNotExist:
+        print "PostDoesNotExist"
         pass
         
     else:
-        datafile = codecs.open(path, mode="r", encoding="utf-8")
+        datafile = open(path, mode="rb")
         post = pickle.load(datafile)
         datafile.close()
         return post
