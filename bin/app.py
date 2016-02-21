@@ -6,6 +6,7 @@ urls = (
     "/home", "Home",
     "/add", "Add",
     "/manage", "Manage",
+    "/favicon.ico", "favicon"
 )
 
 app = web.application(urls, globals())
@@ -38,7 +39,11 @@ class Manage(object):
     def GET(self):
         if manage:
             return render.manage()
-        
+
+class favicon(object):
+    """For serving the favicon.ico"""
+    def GET(self):
+        return web.seeother("/static/favicon.ico")        
 
 if __name__ == "__main__":
     app.run()
