@@ -2,9 +2,7 @@
 --------
 This projects seeks to implement a blog using
 Python with web.py for backend. Markdown support
-is provided for formatting the content as this
-project does not use JS, JQuery or any other such
-frontend mechanisms. SQL too is not used.
+is provided for formatting the content.
 
 ## Functionality ##
 The following functions are offered:
