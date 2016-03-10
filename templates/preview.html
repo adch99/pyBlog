@@ -1,0 +1,8 @@
+$def with (title, image, content)
+
+<div class="main-container">
+    <h1>$title</h1>
+    $if image:
+        <img src=$image />
+    <p class="content">$:content</p>
+</div>

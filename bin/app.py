@@ -1,12 +1,16 @@
 import web
+from markdown import markdown
 
 from blog import manage
 
+
 urls = (
+    "/", "Home" ,
     "/home", "Home",
     "/add", "Add",
-    "/manage", "Manage",
-    "/favicon.ico", "favicon"
+    "/added", "Preview",
+    "/manage", "Manage",   
+    #"/favicon.ico", "favicon"
 )
 
 app = web.application(urls, globals())
@@ -28,10 +32,23 @@ class Add(object):
         return render.template(render.add())
             
     def POST(self):
-        if form.title and form.content:
-            return render.template(render.added(form.title, form.content))
-        
+        form = web.input(title=None, content=None, image=None)
 
+        print form #debug
+        print form.content #debug
+        
+        if form.title and form.content:
+            return render.template(render.added(
+                    form.title,
+                    form.image,
+                    markdown(form.content)
+                ))
+                
+class Preview(object):
+    """
+    Preview the newly added post and confirm 
+    """
+        
 class Manage(object):
     """Manage added articles:
     * Remove articles
@@ -40,10 +57,6 @@ class Manage(object):
         if manage:
             return render.manage()
 
-class favicon(object):
-    """For serving the favicon.ico"""
-    def GET(self):
-        return web.seeother("/static/favicon.ico")        
 
 if __name__ == "__main__":
     app.run()

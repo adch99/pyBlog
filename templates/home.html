@@ -2,8 +2,8 @@ $def with (posts)
 
 $for post in posts:
     <div class="main-container">
-    <h1>$:post.title</h1>
+    <h1>$post.title</h1>
     $if post.img:
-        <img src=$:post.img />
+        <img src=$post.img />
     <p class="content">$:post.content</p>
     </div>

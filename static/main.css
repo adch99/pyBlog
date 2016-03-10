@@ -51,7 +51,7 @@ div {
     margin: 1% 20%;
 }
 /*Form inputs*/
-input {
+input, textarea {
     border: none;
     border-radius: 2px;
     background-color: #FFFFFF;
@@ -71,7 +71,8 @@ input {
 #content {
     height: 30%;
     width: 90%;
-    text-align: ;
+    wrap: soft;   
+    autofocus: autofocus; 
 }
 
 #submit {
