@@ -5,4 +5,8 @@ $def with (title, image, content)
     $if image:
         <img src=$image />
     <p class="content">$:content</p>
+  <form name="confirm" method="POST" >
+      <input type="button" id="confirm" name="confirm" value="Confirm"/>
+      <input type="button" id="confirm" name="reject" value="Reject"/>
+  </form>
 </div>

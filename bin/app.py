@@ -17,6 +17,9 @@ app = web.application(urls, globals())
 render = web.template.render("templates/")
 rendertemp = web.template.render("templates/","template.html")
 
+# Globals variables for use throughout program
+curPost = None
+
 class Home(object):
     """The Home Page with the articles in
     descending chronological order."""
@@ -38,16 +41,64 @@ class Add(object):
         print form.content #debug
         
         if form.title and form.content:
-            return render.template(render.added(
+            global curPost
+            curPost = manage.Post(
                     form.title,
                     form.image,
                     markdown(form.content)
-                ))
+                )
+            #print curPost
+            web.seeother("/added")
+            #return render.template(render.preview(
+            #        form.title,
+            #        form.image,
+            #        markdown(form.content)
+            #    ))
+            
+
                 
 class Preview(object):
     """
     Preview the newly added post and confirm 
     """
+    def GET(self):
+        #global curPost
+        #if curPost.img == u'':
+        #    curPost.img = None
+        args = (
+            curPost.title,
+            curPost.img,
+            curPost.content
+        )
+        print args
+        return render.template(render.preview(*args))
+      
+    def POST(self):
+        form = web.input(confirm=False, reject=False)
+        
+        # Edge case scenario where "confirm and reject" is true or
+        # "not confirm and not reject" is true
+        try:
+            pass
+        except "Something is amiss":
+            pass
+            
+        
+        if form.reject:
+            web.seeother("/add") 
+            # Need to add functionality so that the user can edit the 
+            # same data that they just wrote rather than showing them
+            # empty fields
+            
+            # Since we are emptying curPost after adding it will be a
+            # good move to check if it has something before rendering
+            # the "/add" page.
+            
+        if form.confirm:
+            # Add the new post
+            manage.addPost(curPost)
+            # Empty the cache
+            curPost = None
         
 class Manage(object):
     """Manage added articles:
