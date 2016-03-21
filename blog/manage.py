@@ -21,6 +21,9 @@ class PostAlreadyExists(Exception):
 '''
 
 class Post(object):
+    """
+    Post object containing title, markdownised content and optionally an image.
+    """
     # add timestamp
     def __init__(self, title, content, img=None):
         """Generates Post object when title, markdownized content
