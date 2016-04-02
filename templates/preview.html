@@ -6,7 +6,7 @@ $def with (title, image, content)
         <img src=$image />
     <p class="content">$:content</p>
   <form name="confirm" method="POST" >
-      <input type="button" id="confirm" name="confirm" value="Confirm"/>
-      <input type="button" id="confirm" name="reject" value="Reject"/>
-  </form>
+      <label><button id="reject" name="reject" value="Reject"/>Reject</label>
+      <label><button id="confirm" name="confirm" value="Confirm"/>Confirm</label>
+    </form>
 </div>

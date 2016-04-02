@@ -1,3 +1,4 @@
+import os
 import web
 from markdown import markdown
 
@@ -32,22 +33,30 @@ class Home(object):
 class Add(object):
     """Add an article to the site."""
     def GET(self):
+        # Empty the cache
+        curPost = None
         return render.template(render.add())
             
     def POST(self):
-        form = web.input(title=None, content=None, image=None)
+        form = web.input(title=None, content=None, image={})
 
         print form #debug
-        print form.content #debug
+        print "Content:",form.content #debug
+        print "Image:", form.image, form.image.value #debug
         
-        if form.image == u"": form.image = None
+        if form.image.value == u"": fname = None
+        else: 
+            fname = os.path.join("data", form.title.replace(" ","_"))
+            imgfile = open(fname, "wb")
+            imgfile.write(form.image.value)
+            imgfile.close()
         
         if form.title and form.content:
             global curPost
             curPost = manage.Post(
                     form.title,
-                    form.image,
-                    markdown(form.content)
+                    markdown(form.content),
+                    fname
                 )
             #print curPost
             web.seeother("/added")
@@ -81,9 +90,9 @@ class Preview(object):
         # Edge case scenario where "confirm and reject" is true or
         # "not confirm and not reject" is true
         try:
-            pass
-        except "Something is amiss":
-            pass
+            assert not (confirm and reject)
+        except AssertionError:
+            print "Something is amiss"
             
         
         if form.reject:
@@ -97,10 +106,10 @@ class Preview(object):
             # the "/add" page.
             
         if form.confirm:
+            global curPost
+            print curPost.__str__() #debug
             # Add the new post
             manage.addPost(curPost)
-            # Empty the cache
-            curPost = None
         
 class Manage(object):
     """Manage added articles:

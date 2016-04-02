@@ -8,17 +8,20 @@ import pickle
 # * Remove a post
 # * Edit a post**
 
-'''
+class InvalidPost(Exception):
+    """Post given is invalid. It is either False or None."""
+    def __init__(self, post):
+        print "The Post object is invalid: ", post
+
 class PostDoesntExist(Exception):
     """Post with given title doesn't exist."""
     def __init__(self, title):
-        print "Post %s doesn't exist" % title
+        print "Post \'%s\' doesn't exist" % title
 
 class PostAlreadyExists(Exception):
     """Post with a given filename already exists."""
     def __init__(self, title):
-        print "Post with title %s already exists." % title
-'''
+        print "Post with title \'%s\' already exists." % title
 
 class Post(object):
     """
@@ -37,7 +40,7 @@ class Post(object):
             "title": self.title,
             "content": self.content,
             "Image": self.img
-            }
+            }.__str__()
 
 def addPost(post):
     """
@@ -45,7 +48,11 @@ def addPost(post):
     Returns None if no error.
     """
     try:
-        path = os.path.join("data",post.title.replace(" ","_"))
+        # is it a valid Post?
+        if not post: raise InvalidPost(post)
+        
+        # Does Post with same name already exist?
+        path = os.path.join("data", post.title.replace(" ","_"))
         if os.path.isfile(path):
              raise PostAlreadyExists(post.title)
     

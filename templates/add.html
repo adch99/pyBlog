@@ -1,10 +1,10 @@
 <div class="main-container">
-    <form action="/add" method="POST">
+    <form action="/add" method="POST" enctype="multipart/form-data">
     <pre>Title</pre> <input type="text" id="title" name="title" placeholder="Your Title" required/>
     <pre>Image</pre> <input type="file" id="image" name="image"/>
     <pre>Content</pre> <!--<input type="text" id="content"/>-->
-    <textarea id="content" name="content" placeholder="Your Content Here" requir></textarea>
+    <textarea id="content" name="content" placeholder="Your Content Here" required></textarea>
     <br><br>
-    <input type="submit" id="submit"/>
+    <label><button type="submit"/>Post</label>
     </form>
 </div>

@@ -9,7 +9,7 @@ h1 {
     text-align: center;
     margin-top: 10px;
     font-size: 2em;
-    font-family: "open sans", sans-serif;
+    font-family: "Open Sans", sans-serif;
 }
 
 div {
@@ -36,7 +36,7 @@ div {
     line-height: 90px;
     font-size: 2em;
     text-align: center;
-    font-family: sans-serif;
+    font-family: "Open Sans", sans-serif;
     padding: 0% 1%;
     display: inline-block;
     border-radius: 2px;
@@ -50,34 +50,55 @@ div {
     color: #ffffff;
     margin: 1% 20%;
 }
+
+/*.main-container * {
+    margin-left: 1%;
+}*/
 /*Form inputs*/
 input, textarea {
     border: none;
     border-radius: 2px;
     background-color: #FFFFFF;
     color: #000000;
+    font-family: "Open Sans", sans-serif;
 }
 
 #title {
     width: 90%;
     font-size: 1.8em;
     padding: 0.5% 0;
+    text-align: center;
 }
 
 #image {
-    font-family: sans-serif;
+    font-family: "Open Sans", sans-serif;
 }
 
 #content {
     height: 30%;
     width: 90%;
+    padding: 1% 1%;
     wrap: soft;   
     autofocus: autofocus; 
 }
 
-#submit, .confirm {
+form button {
     width: 125px;
     height: 50px;
+    background-color: #FFFFFF;
+    color: #000000;
+    font: 1.25em Monospace;
+    border-radius: 2px;
+    border: none;
+    margin: 5% 5% 0 0;
+}
+
+#confirm {
+    margin-left: 65%;
+}
+
+#reject {
+    margin-left: 3%;
 }
 
 footer {
