@@ -40,6 +40,8 @@ class Add(object):
         print form #debug
         print form.content #debug
         
+        if form.image == u"": form.image = None
+        
         if form.title and form.content:
             global curPost
             curPost = manage.Post(

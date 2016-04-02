@@ -1,5 +1,6 @@
 # ignore pyc files
-*.pyc
+*/*.pyc
+*/*.pyo
 # ignore temporory files created by scratch and gedit
 */*~
 # ignore virtualenv files
