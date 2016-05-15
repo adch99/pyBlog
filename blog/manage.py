@@ -13,7 +13,7 @@ class InvalidPost(Exception):
     def __init__(self, post):
         print "The Post object is invalid: ", post
 
-class PostDoesntExist(Exception):
+class PostDoesNotExist(Exception):
     """Post with given title doesn't exist."""
     def __init__(self, title):
         print "Post \'%s\' doesn't exist" % title
@@ -23,6 +23,9 @@ class PostAlreadyExists(Exception):
     def __init__(self, title):
         print "Post with title \'%s\' already exists." % title
 
+#
+# Post Class
+#
 class Post(object):
     """
     Post object containing title, markdownised content and optionally an image.
@@ -41,6 +44,10 @@ class Post(object):
             "content": self.content,
             "Image": self.img
             }.__str__()
+
+#
+# Post Functions
+#
 
 def addPost(post):
     """
@@ -107,4 +114,5 @@ def getPostList():
     Returns a list of titles of saved Posts.
     Use getPost(title) to get the actual post.
     """
-    return os.listdir("data")
+    posts = os.listdir("data")
+    return posts

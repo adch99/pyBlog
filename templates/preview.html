@@ -1,12 +1,15 @@
-$def with (title, image, content)
+$def with (title, image, content, b1, b2)
 
 <div class="main-container">
     <h1>$title</h1>
     $if image:
         <img src=$image />
     <p class="content">$:content</p>
-  <form name="confirm" method="POST" >
-      <label><button id="reject" name="reject" value="Reject"/>Reject</label>
-      <label><button id="confirm" name="confirm" value="Confirm"/>Confirm</label>
+    <form name="confirm" method="POST" >
+      <!--<label><button id="reject" name="reject" value="True"/>Reject</label>
+      <label><button id="confirm" name="confirm" value="True"/>Confirm</label>-->
+
+      $:b1.render()
+      $:b2.render()
     </form>
 </div>

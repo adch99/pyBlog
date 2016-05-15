@@ -1,5 +1,6 @@
 import os
 import web
+from web.form import Form, Button
 from markdown import markdown
 
 from blog import manage
@@ -40,13 +41,25 @@ class Add(object):
     def POST(self):
         form = web.input(title=None, content=None, image={})
 
-        print form #debug
-        print "Content:",form.content #debug
-        print "Image:", form.image, form.image.value #debug
+        #print form #debug
+        #print "Content:",form.content #debug
+        #print "Image:", form.image, form.image.value #debug
         
         if form.image.value == u"": fname = None
-        else: 
-            fname = os.path.join("data", form.title.replace(" ","_"))
+        else:
+            #print form.image.filename #debug
+            # Check for Extension
+            if u"." in form.image.filename:
+                extension = u""
+                for l in form.image.filename[::-1]: 
+                    extension += l
+                    if l == u".": break
+            else: extension = u""
+            
+            fname = os.path.join("static", "data", "__images", form.title.replace(" ","_")+extension[::-1])
+            #print "fname:", fname, "extension:", extension #debug
+            
+            # Save the image
             imgfile = open(fname, "wb")
             imgfile.write(form.image.value)
             imgfile.close()
@@ -79,23 +92,24 @@ class Preview(object):
         args = (
             curPost.title,
             curPost.img,
-            curPost.content
+            curPost.content,
+            Button("Confirm", id="confirm", value="confirm", class_="button"),
+            Button("Reject", id="reject", value="reject", class_="button")
         )
-        print args
+        #print args #debug
         return render.template(render.preview(*args))
       
     def POST(self):
-        form = web.input(confirm=False, reject=False)
+        form = web.input() 
+        if form[form.keys()[0]] == "confirm": confirm = True
+        else: confirm = False
         
-        # Edge case scenario where "confirm and reject" is true or
-        # "not confirm and not reject" is true
-        try:
-            assert not (confirm and reject)
-        except AssertionError:
-            print "Something is amiss"
-            
-        
-        if form.reject:
+        #print "Preview Form Keys:", form.keys() #debug
+        #print "Preview form:", form #debug
+        #print confirm, reject #debug
+              
+        if not confirm:
+            os.remove(curPost.img) # Remove the image
             web.seeother("/add") 
             # Need to add functionality so that the user can edit the 
             # same data that they just wrote rather than showing them
@@ -105,20 +119,22 @@ class Preview(object):
             # good move to check if it has something before rendering
             # the "/add" page.
             
-        if form.confirm:
+        if confirm:
             global curPost
             print curPost.__str__() #debug
             # Add the new post
             manage.addPost(curPost)
+            web.seeother("/home")
         
 class Manage(object):
     """Manage added articles:
     * Remove articles
     * Edit articles (to be developed later)"""
     def GET(self):
-        if manage:
+        try:
             return render.manage()
-
+        except:
+            web.seeother("/home")
 
 if __name__ == "__main__":
     app.run()
