@@ -5,7 +5,7 @@ except ImportError:
 	from distutils.core import setup
 
 config = {
-	'description': 'A web.py app that makes a simple blog.',
+	'description': 'A web.py app that makes a simple blog-like app, commonly used as a digital diary.',
 	'author': 'Aditya Chincholi',
 	'url': 'url to get it at',
 	'download_url': 'Where to download it',
@@ -13,7 +13,7 @@ config = {
 	'version': '0.1',
 	'install_requires': ['nose', 'web.py', 'markdown'],
 	'packages': ['blog'],
-	'scripts': []
+	'scripts': ["bin/app.py"],
 	'name': 'Blog'
 }
 

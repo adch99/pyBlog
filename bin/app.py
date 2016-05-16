@@ -29,6 +29,8 @@ class Home(object):
         posts = []
         for title in manage.getPostList():
             posts.append(manage.getPost(title))
+            
+        posts = manage.sortPostList(posts)
         return render.template(render.home(posts))
 
 class Add(object):
@@ -109,7 +111,7 @@ class Preview(object):
         #print confirm, reject #debug
               
         if not confirm:
-            os.remove(curPost.img) # Remove the image
+            if curPost.img: os.remove(curPost.img) # Remove the image
             web.seeother("/add") 
             # Need to add functionality so that the user can edit the 
             # same data that they just wrote rather than showing them
@@ -121,7 +123,7 @@ class Preview(object):
             
         if confirm:
             global curPost
-            print curPost.__str__() #debug
+            #print curPost.__str__() #debug
             # Add the new post
             manage.addPost(curPost)
             web.seeother("/home")

@@ -1,6 +1,7 @@
 #!/bin/python
 import os
 import pickle
+import time
 
 # Contains functions for managing posts of the blog
 # It can -
@@ -37,6 +38,8 @@ class Post(object):
         self.title = title
         self.content = content
         self.img = img
+        self.time = time.time()
+        
         
     def __str__(self):
         return {
@@ -116,3 +119,33 @@ def getPostList():
     """
     posts = os.listdir("data")
     return posts
+    
+def sortPostList(posts):
+    """
+Returns the list of posts sorted according to their creation time
+in descending order.
+    """
+    result = []
+    if len(posts) < 2:
+        return posts
+    mid = int(len(posts)/2)
+    y = sortPostList(posts[:mid])
+    z = sortPostList(posts[mid:])
+    while (len(y) > 0) or (len(z) > 0):
+        if len(y) > 0 and len(z) > 0:
+            if y[0].time > z[0].time:
+                result.append(z[0])
+                z.pop(0)
+            else:
+                result.append(y[0])
+                y.pop(0)
+        elif len(z) > 0:
+            for i in z:
+                result.append(i)
+                z.pop(0)
+        else:
+            for i in y:
+                result.append(i)
+                y.pop(0)
+    return result[::-1]
+    
